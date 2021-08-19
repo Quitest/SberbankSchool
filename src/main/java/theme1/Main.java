@@ -1,7 +1,6 @@
 package theme1;
 
 import java.util.Arrays;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -38,7 +37,7 @@ public class Main {
         System.out.print("Введите искомый элемент: ");
         Integer val = Integer.parseInt(scanner.nextLine());
         System.out.println("Элемент " +
-                (Searcher.binarySearch(arrayInteger, val) ? // возможно, не самый читаемый код, но захотелось так попробовать :)
+                (Searcher.binarySearchGeneric(arrayInteger, val) ? // возможно, не самый читаемый код, но захотелось так попробовать :)
                         "найден" : "НЕ найден") + " методом Searcher.binarySearch");
 
         System.out.print("\nПример поиска в массиве String ");
@@ -53,7 +52,7 @@ public class Main {
         System.out.println(Arrays.toString(arrayString));
         System.out.print("Введите искомый элемент: ");
         String str = scanner.nextLine();
-        //TODO на досуге детально разобраться с тем как работает поиск в массиве отсортированных строк.
+        //TODO на досуге детально разобраться с тем как работает бинарный поиск в массиве отсортированных строк.
         // сейчас нет полного понимания. Обратить внимание на compareTo в реализации сортировки.
         System.out.println("Элемент " +
                 (Searcher.binarySearchGeneric(arrayString, str) ?
