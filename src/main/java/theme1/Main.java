@@ -1,6 +1,7 @@
 package theme1;
 
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -10,9 +11,12 @@ public class Main {
     public static final int GENERATION_LIMIT = 10;
 
     public static void main(String[] args) {
+
+
         System.out.println("СОРТИРОВКА ПУЗЫРЬКОМ");
         System.out.println("Пример Integer[]");
         Integer[] arrayInteger = Stream
+                //Взамен сложной "математической" гнерации интервала можно использовать класс Random, например
                 .generate(() -> (int) (Math.random() * (MAX_GEN_VAL - MIN_GEN_VAL) + MIN_GEN_VAL))
                 .limit(GENERATION_LIMIT)
                 .toArray(Integer[]::new);

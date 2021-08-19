@@ -1,29 +1,6 @@
 package theme1;
 
 public class Sorter {
-    /*public static final int MIN_GEN_VAL = -10;
-    public static final int MAX_GEN_VAL = 10;
-    public static final int GENERATION_LIMIT = 10;*/
-
-    /*public static void main(String[] args) {
-        System.out.println("Пример Integer.");
-        Integer[] arrayInteger = Stream
-                .generate(() -> (int) (Math.random() * (MAX_GEN_VAL - MIN_GEN_VAL) + MIN_GEN_VAL))
-                .limit(GENERATION_LIMIT)
-                .toArray(Integer[]::new);
-        System.out.println("Исходный: " + Arrays.toString(arrayInteger));
-        Sorter.bubleSortGeneric(arrayInteger);
-        System.out.println("Отсортированный: " + Arrays.toString(arrayInteger));
-
-        System.out.println("\nПример Byte.");
-        Byte[] arrayByte = Stream.generate(() -> (byte) (Math.random() * (MAX_GEN_VAL - MIN_GEN_VAL) + MIN_GEN_VAL))
-                .limit(GENERATION_LIMIT)
-                .toArray(Byte[]::new);
-        System.out.println("Исходный: " + Arrays.toString(arrayByte));
-        Sorter.bubleSortGeneric(arrayByte);
-        System.out.println("Отсортированный: " + Arrays.toString(arrayByte));
-    }*/
-
     /**
      * Попытка реализации обобщенного метода сортировки пузырьком.
      *

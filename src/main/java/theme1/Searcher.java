@@ -30,19 +30,6 @@ public class Searcher {
                 }
             }
         }
-
-//        L := 1; U := N; found := false;
-//        while (L <= U) & not found do
-//            M := середина отрезка L..U;
-//        if a[M] = T then
-//        found := true;
-//        elseif a[M] < T then
-//        L := M+1;
-//  else
-//        U := M-1;
-//        end;
-//        end
-
         return found;
     }
 
