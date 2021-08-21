@@ -7,7 +7,12 @@ public class Triangle extends Shape {
 
     public Triangle(double side1, double side2, double side3) {
         if (side1 < 0 || side2 < 0 || side3 < 0) {
-            throw new IllegalArgumentException("Стороны отрицательные");
+            throw new IllegalArgumentException("Одна из сторон отрицательная");
+        }
+        if (side1 >= side2 + side3 ||
+                side2 >= side1 + side3 ||
+                side3 >= side1 + side2) {
+            throw new IllegalArgumentException("Одна сторона больше суммы двух других. Такой треугольник не может сущестоввать");
         }
         this.side1 = side1;
         this.side2 = side2;

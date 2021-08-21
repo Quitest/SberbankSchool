@@ -14,8 +14,6 @@ public class Main {
     public static final int GENERATION_LIMIT = 10;
 
     public static void main(String[] args) {
-
-
         System.out.println("\t1.1 СОРТИРОВКА ПУЗЫРЬКОМ");
         System.out.println("Пример Integer[]");
         Integer[] arrayInteger = Stream
@@ -34,7 +32,7 @@ public class Main {
         System.out.println("Исходный: " + Arrays.toString(arrayByte));
         Sorter.bubleSortGeneric(arrayByte);
         System.out.println("Отсортированный: " + Arrays.toString(arrayByte));
-
+//----------------------------------------------------------------------------------------------------------------------
         System.out.println("\n\t1.2 БИНАРНЫЙ ПОИСК в предварительно отсотированных массивах");
         System.out.println("Пример поиска в массиве Integer " + Arrays.toString(arrayInteger));
         Scanner scanner = new Scanner(System.in);
@@ -61,11 +59,11 @@ public class Main {
         System.out.println("Элемент " +
                 (Searcher.binarySearchGeneric(arrayString, str) ?
                         "найден" : "НЕ найден") + " методом Searcher.binarySearchGeneric");
-
+//----------------------------------------------------------------------------------------------------------------------
         System.out.println("\n\t2. Реализация иерархии объектов\nПример вывода");
         List<Shape> shapeList = new ArrayList<>();
         shapeList.add(new Circle(4));
-        shapeList.add(new Triangle(3, 5, 7));
+        shapeList.add(new Triangle(2, 1, 2));
         shapeList.add(new Rect(2, 5));
         shapeList.add(new Square(5));
 //        shapeList.add(new Square(-4)); //пример с недопустимым аргументом
