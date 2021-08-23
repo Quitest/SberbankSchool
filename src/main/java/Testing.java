@@ -14,7 +14,7 @@ public class Testing {
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
-        //изменения1 для проверки коммитра в crazy_notes
+        //изменения2 для проверки коммитра в crazy_notes
     }
 
     public static void main(String[] args) {
