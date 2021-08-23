@@ -54,8 +54,6 @@ public class Main {
         System.out.println(Arrays.toString(arrayString));
         System.out.print("Введите искомый элемент: ");
         String str = scanner.nextLine();
-        //TODO на досуге детально разобраться с тем как работает бинарный поиск в массиве отсортированных строк.
-        // сейчас нет полного понимания. Обратить внимание на compareTo в реализации сортировки.
         System.out.println("Элемент " +
                 (Searcher.binarySearchGeneric(arrayString, str) ?
                         "найден" : "НЕ найден") + " методом Searcher.binarySearchGeneric");
