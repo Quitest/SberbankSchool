@@ -17,7 +17,6 @@ import java.util.stream.Stream;
 public class TextAnalizer implements Iterable {
     private final Charset charset;
     private final Path pathToFile;
-    @Getter
     private List<String> text;
 
     public TextAnalizer(Path pathToFile, Charset charset) {
@@ -77,20 +76,23 @@ public class TextAnalizer implements Iterable {
         return requestedLines;
     }
 
+    public List<String> getText() {
+        return new ArrayList<>(text);
+    }
 
     @Override
     public Iterator<String> iterator() {
         return new Iterator<String>() {
-            private int currentIndex = 0;
+            private int currentIndex = text.size()-1;
 
             @Override
             public boolean hasNext() {
-                return currentIndex < text.size() && text.get(currentIndex) != null;
+                return currentIndex > 0 && text.get(currentIndex) != null;
             }
 
             @Override
             public String next() {
-                return text.get(currentIndex++);
+                return text.get(currentIndex--);
             }
         };
     }

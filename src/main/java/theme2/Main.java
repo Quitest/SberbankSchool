@@ -69,7 +69,10 @@ public class Main {
 
         //Задание 5: Реализуйте свой Iterator для обхода списка в обратном порядке.
         System.out.println("2.5. Реализуйте свой Iterator для обхода списка в обратном порядке.");
-
+        Iterator<String> it = analizer.iterator();
+        while (it.hasNext()) {
+            System.out.println("\t" + it.next());
+        }
 
         System.out.println("2.6. Вывести на экран строки, номера которых задаются пользователем в произвольном порядке.");
         //Вариант 1. Простой вывод
