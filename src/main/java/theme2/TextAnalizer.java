@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 /**
  * Класс предназначен для анализа относительно небольших текстов согласно заданию.
  */
-public class TextAnalizer {
+public class TextAnalizer implements Iterable {
     private final Charset charset;
     private final Path pathToFile;
     @Getter
@@ -75,5 +75,23 @@ public class TextAnalizer {
             }
         }
         return requestedLines;
+    }
+
+
+    @Override
+    public Iterator<String> iterator() {
+        return new Iterator<String>() {
+            private int currentIndex = 0;
+
+            @Override
+            public boolean hasNext() {
+                return currentIndex < text.size() && text.get(currentIndex) != null;
+            }
+
+            @Override
+            public String next() {
+                return text.get(currentIndex++);
+            }
+        };
     }
 }
