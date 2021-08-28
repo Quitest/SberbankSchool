@@ -1,8 +1,17 @@
 package them4_ExceptionHandling.Terminal;
 
-public class TerminalServer implements Terminal{
+import them4_ExceptionHandling.Terminal.InnerExceptions.NoMoneyException;
+
+public class TerminalServer implements Terminal {
     private double balance;
     private int pin;
+
+    public TerminalServer(double balance) {
+        this.balance = balance;
+    }
+
+    public TerminalServer() {
+    }
 
     @Override
     public double getBalance() {
@@ -10,24 +19,17 @@ public class TerminalServer implements Terminal{
     }
 
     @Override
-    public double putMoney(double amount) {
-        checkAmount(amount);
-        balance+=amount;
+    public double putCash(double amount) {
+        balance += Math.abs(amount); //доп. защита. Не даем внести отрицательную сумму на счет, что приведет к незаконному обогащению. :)
         return balance;
     }
 
     @Override
-    public double transferMoney(double amount) {
-        checkAmount(amount);
-        balance-=amount;
-        return balance;
-    }
-
-    //FIXME бросает эксепшен наследник RuntimeException, в данном случае это, наверное, не то, что нужно.
-    // обдумать этот момнет. Да и вообще зачем тут кидать эксепшен? Дешевле обойтись обычным if.
-    private void checkAmount(double amount){
-        if (amount%100!=0){
-            throw new IllegalArgumentException("Сумма не кратна 100");
+    public double takeCash(double amount) throws NoMoneyException {
+        if (balance < amount) {
+            throw new NoMoneyException("Недостаточно денег на балансе.");
         }
+        balance -= Math.abs(amount); //доп. защита. Не даем снять отрицательную сумму, что приведет к незаконному обогащению. :)
+        return balance;
     }
 }

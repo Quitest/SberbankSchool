@@ -1,5 +1,10 @@
 package them4_ExceptionHandling.Terminal;
 
+import them4_ExceptionHandling.Terminal.InnerExceptions.IllegalAmountException;
+import them4_ExceptionHandling.Terminal.InnerExceptions.NoMoneyException;
+
+import java.io.IOException;
+
 //Интерфейс описывает работу с финансами и при этом оперирует значениями double. В реальных проектах надо помнить,
 // что это плохая практика - использовать float, double для денежных операций - т.к. часто возникают ошибки округления
 // при вычислениях. Яркий пример: System.out.println(1.13f + 10000f - 10000f);
@@ -19,14 +24,12 @@ public interface Terminal {
      * @param money сумма, которую необходимо положить на счет. Сумма должна быть кратна 100.
      * @return сумма, образовавшаяся на счету в итоге.
      */
-    double putMoney(double money);
+    double putCash(double money) throws IllegalAmountException;
 
     /**
-     * Снять указанную сумму денег со счета. <p>Прим.: название метода несовсем подходящее, т.к. подразумевается, что
-     * сумма будет переведа куда-то, а по факту она будет просто изъята и выкинута. И всеже название оставлю таким
-     * для напоминания самому себе, что имена надо давать не только осмысленные, но и раскрывающие суть :). </p>
+     * Снять указанную сумму денег со счета.
      * @param money сумма перевода. Сумма должна быть кратна 100.
      * @return сумма, оставшаяся после перевода.
      */
-    double transferMoney(double money);
+    double takeCash(double money) throws IOException;
 }
