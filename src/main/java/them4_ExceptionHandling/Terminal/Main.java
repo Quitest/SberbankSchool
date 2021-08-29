@@ -3,7 +3,6 @@ package them4_ExceptionHandling.Terminal;
 import them4_ExceptionHandling.Terminal.InnerExceptions.IllegalAmountException;
 import them4_ExceptionHandling.Terminal.InnerExceptions.NoMoneyException;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
