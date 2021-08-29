@@ -2,6 +2,7 @@ package them4_ExceptionHandling.Terminal;
 
 import them4_ExceptionHandling.Terminal.InnerExceptions.IllegalAmountException;
 import them4_ExceptionHandling.Terminal.InnerExceptions.NoMoneyException;
+import them4_ExceptionHandling.Terminal.pinvalidator.PinValidator;
 
 import java.util.Scanner;
 

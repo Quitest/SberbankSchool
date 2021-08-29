@@ -2,10 +2,11 @@ package them4_ExceptionHandling.Terminal;
 
 import them4_ExceptionHandling.Terminal.InnerExceptions.IllegalAmountException;
 import them4_ExceptionHandling.Terminal.InnerExceptions.NoMoneyException;
+import them4_ExceptionHandling.Terminal.pinvalidator.PinValidator;
 
 public class TerminalImpl implements Terminal {
     private final TerminalServer terminalServer;
-    private final PinValidator pinValidator;
+    private final PinValidator pinValidator; //WTF почему проверка пина происходить должна на терминале, а не на серверной стороне?
 
     public TerminalImpl(TerminalServer terminalServer, PinValidator pinValidator) {
         this.terminalServer = terminalServer;
