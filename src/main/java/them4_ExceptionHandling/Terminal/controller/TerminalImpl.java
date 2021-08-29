@@ -1,8 +1,10 @@
-package them4_ExceptionHandling.Terminal;
+package them4_ExceptionHandling.Terminal.controller;
 
-import them4_ExceptionHandling.Terminal.InnerExceptions.IllegalAmountException;
-import them4_ExceptionHandling.Terminal.InnerExceptions.NoMoneyException;
-import them4_ExceptionHandling.Terminal.pinvalidator.PinValidator;
+import them4_ExceptionHandling.Terminal.innerExceptions.IllegalAmountException;
+import them4_ExceptionHandling.Terminal.innerExceptions.NoMoneyException;
+import them4_ExceptionHandling.Terminal.PinValidator;
+import them4_ExceptionHandling.Terminal.Terminal;
+import them4_ExceptionHandling.Terminal.model.TerminalServer;
 
 public class TerminalImpl implements Terminal {
     private final TerminalServer terminalServer;
@@ -40,5 +42,10 @@ public class TerminalImpl implements Terminal {
         checkAmount(money);
         terminalServer.takeCash(money);
         return terminalServer.getBalance();
+    }
+
+
+    public boolean loginToTerminalServer(int pin){
+        return terminalServer.authOnServer(pin);
     }
 }

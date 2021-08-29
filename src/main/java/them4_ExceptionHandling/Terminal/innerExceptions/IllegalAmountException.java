@@ -1,4 +1,4 @@
-package them4_ExceptionHandling.Terminal.InnerExceptions;
+package them4_ExceptionHandling.Terminal.innerExceptions;
 
 import java.io.IOException;
 

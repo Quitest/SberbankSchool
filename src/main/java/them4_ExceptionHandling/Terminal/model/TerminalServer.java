@@ -1,10 +1,11 @@
-package them4_ExceptionHandling.Terminal;
+package them4_ExceptionHandling.Terminal.model;
 
-import them4_ExceptionHandling.Terminal.InnerExceptions.NoMoneyException;
+import them4_ExceptionHandling.Terminal.innerExceptions.NoMoneyException;
+import them4_ExceptionHandling.Terminal.Terminal;
 
 public class TerminalServer implements Terminal {
     private double balance;
-    private int pin;
+    private int pin=1234;
 
     public TerminalServer(double balance) {
         this.balance = balance;
@@ -31,5 +32,9 @@ public class TerminalServer implements Terminal {
         }
         balance -= Math.abs(amount); //доп. защита. Не даем снять отрицательную сумму, что приведет к незаконному обогащению. :)
         return balance;
+    }
+
+    public boolean authOnServer(int pin){
+        return this.pin==pin;
     }
 }

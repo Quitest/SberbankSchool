@@ -1,12 +1,14 @@
-package them4_ExceptionHandling.Terminal;
+package them4_ExceptionHandling.Terminal.view;
 
-import them4_ExceptionHandling.Terminal.InnerExceptions.IllegalAmountException;
-import them4_ExceptionHandling.Terminal.InnerExceptions.NoMoneyException;
-import them4_ExceptionHandling.Terminal.pinvalidator.PinValidator;
+import them4_ExceptionHandling.Terminal.PinValidator;
+import them4_ExceptionHandling.Terminal.innerExceptions.IllegalAmountException;
+import them4_ExceptionHandling.Terminal.innerExceptions.NoMoneyException;
+import them4_ExceptionHandling.Terminal.model.TerminalServer;
+import them4_ExceptionHandling.Terminal.controller.TerminalImpl;
 
 import java.util.Scanner;
 
-public class Main {
+public class CLI {
     private static final String RUB = "\u20BD";
 
     public static void main(String[] args) {
