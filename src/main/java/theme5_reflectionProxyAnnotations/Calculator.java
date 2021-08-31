@@ -7,5 +7,6 @@ public interface Calculator {
      * @return факсториал
      */
     //По условию задачи возвращается int, хотя практичнее было бы long или вообще BigDecimal, какой-нибуль.
+    @Metric
     int calc(int number);
 }
