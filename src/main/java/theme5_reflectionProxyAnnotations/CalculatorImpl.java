@@ -1,0 +1,15 @@
+package theme5_reflectionProxyAnnotations;
+
+import java.util.stream.IntStream;
+
+public class CalculatorImpl implements Calculator {
+    public static void main(String[] args) {
+        System.out.println(new CalculatorImpl().calc(7));
+    }
+
+    @Override
+    public int calc(int number) {
+        return IntStream.rangeClosed(1, number)
+                .reduce(1, (x1, x2) -> x1 * x2);
+    }
+}
