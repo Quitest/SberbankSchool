@@ -1,10 +1,8 @@
 package theme5_reflectionProxyAnnotations.BeanUtils;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -13,10 +11,16 @@ import java.util.stream.Collectors;
 Задача 7:
  Реализовать следующий класс по документации
 */
+//TODO не хватает универсальности. При возможности дописать.
 public class BeanUtils {
     public static void main(String[] args) {
-//        getMethodsByType(new GregorianCalendar(), "set").forEach(System.out::println);
-        assign(new GregorianCalendar(), new GregorianCalendar());
+        ClassSettersGetters to = new ClassSettersGetters();
+        ClassGetters from = new ClassGetters(11, "str");
+
+        System.out.println("ДО: " + to.getInteger() + " | " + to.getString());
+        assign(to, from);
+        System.out.println("ПОСЛЕ: " + to.getInteger() + " | " + to.getString());
+
     }
 
     /**
@@ -38,40 +42,28 @@ public class BeanUtils {
     public static void assign(Object to, Object from) {
         List<Method> gettersFrom = getMethodsByType(from, "get");
         List<Method> settersTo = getMethodsByType(to, "set");
-
         for (Method setter : settersTo) {
-
-
             try {
                 Method correspondGetter = gettersFrom.stream()
-                    .filter(m -> m.getName().substring(2).equals(setter.getName().substring(2)))
-                    .findFirst().get();
+                        .filter(m -> m.getName().substring(2).equals(setter.getName().substring(2)))
+                        .findFirst().get();
                 Object result = correspondGetter.invoke(from);//FIXME падает при наличии параметров
-                setter.invoke(to,result);
+                setter.invoke(to, result);
             } catch (IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
-            } catch (NoSuchElementException e){
+            } catch (NoSuchElementException e) {
             }
         }
     }
 
-    //Возможно, стоило бы ограничить количество вариантов methodType.
+    //TODO Возможно, стоило бы ограничить количество вариантов methodType.
     public static List<Method> getMethodsByType(Object obj, String methodType) {
         Method[] methods = obj.getClass().getMethods();
-//        String mType = methodType == MethodType.GETTER ? "get" : "set";
         return Arrays.stream(methods)
                 .filter(method -> method.getName().startsWith(methodType))
-//                .map(Method::toString) // для вывода полной сигнатуры
+//                .map(Method::toString) // для вывода контракта + модификаторов
 //                .map(Method::getName) //вывод только имени геттера
                 .collect(Collectors.toList());
-    }
-
-    private static String getSignature(Method method){
-        StringBuilder sb = new StringBuilder();
-        sb.append(method.getName())
-                .append(Arrays.toString(method.getParameters()));
-        String s = sb.toString();
-        return s;
     }
 }
 
