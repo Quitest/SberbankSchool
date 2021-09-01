@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 /*
@@ -39,14 +40,17 @@ public class BeanUtils {
         List<Method> settersTo = getMethodsByType(to, "set");
 
         for (Method setter : settersTo) {
-            Method correspondGetter = gettersFrom.stream()
+
+
+            try {
+                Method correspondGetter = gettersFrom.stream()
                     .filter(m -> m.getName().substring(2).equals(setter.getName().substring(2)))
                     .findFirst().get();
-            try {
-                Object result = correspondGetter.invoke(from);
+                Object result = correspondGetter.invoke(from);//FIXME падает при наличии параметров
                 setter.invoke(to,result);
             } catch (IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
+            } catch (NoSuchElementException e){
             }
         }
     }
