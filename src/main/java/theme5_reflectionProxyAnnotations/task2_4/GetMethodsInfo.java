@@ -1,4 +1,4 @@
-package theme5_reflectionProxyAnnotations.getAllMethds;
+package theme5_reflectionProxyAnnotations.task2_4;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class GetMethodsInfo {
     /**
+     * Задача 2
      * Получает все методы класса, включая все родительские методы (включая приватные)
      *
      * @param obj
@@ -70,17 +71,5 @@ public class GetMethodsInfo {
             }
         }
         return true;
-    }
-
-    public static void main(String[] args) throws IllegalAccessException {
-        //Задача 2
-        //Немного трудно читаемого кода - это для практики работы с потоками.
-        GetMethodsInfo.getAllMethods(5).forEach((k, v) -> v.forEach(m -> System.out.printf("%s <--- %s %n", k, m)));
-
-        //Задача 3
-        GetMethodsInfo.getGetters(new GregorianCalendar()).forEach(System.out::println);
-
-        //Задача 4
-        System.out.println(GetMethodsInfo.isNameEqualsValue(new Fields()));
     }
 }

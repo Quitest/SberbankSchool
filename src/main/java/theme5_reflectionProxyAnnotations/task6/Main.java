@@ -1,4 +1,7 @@
-package theme5_reflectionProxyAnnotations;
+package theme5_reflectionProxyAnnotations.task6;
+
+import theme5_reflectionProxyAnnotations.task1.Calculator;
+import theme5_reflectionProxyAnnotations.task1.CalculatorImpl;
 
 //TODO полезная информация:
 // https://www.baeldung.com/java-dynamic-proxies

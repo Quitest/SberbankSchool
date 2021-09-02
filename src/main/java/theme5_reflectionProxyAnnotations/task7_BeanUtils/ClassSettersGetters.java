@@ -1,6 +1,4 @@
-package theme5_reflectionProxyAnnotations.BeanUtils;
-
-import java.util.GregorianCalendar;
+package theme5_reflectionProxyAnnotations.task7_BeanUtils;
 
 public class ClassSettersGetters extends ClassGetters {
     private Integer integer;

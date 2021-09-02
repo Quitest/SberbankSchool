@@ -1,4 +1,4 @@
-package theme5_reflectionProxyAnnotations;
+package theme5_reflectionProxyAnnotations.task6;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;

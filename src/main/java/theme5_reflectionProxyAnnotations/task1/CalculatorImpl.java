@@ -1,4 +1,4 @@
-package theme5_reflectionProxyAnnotations;
+package theme5_reflectionProxyAnnotations.task1;
 
 import java.util.stream.IntStream;
 

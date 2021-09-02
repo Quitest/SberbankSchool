@@ -1,4 +1,4 @@
-package theme5_reflectionProxyAnnotations.getAllMethds;
+package theme5_reflectionProxyAnnotations.task2_4;
 
 /**
  * Класс для проверки задачи 4
