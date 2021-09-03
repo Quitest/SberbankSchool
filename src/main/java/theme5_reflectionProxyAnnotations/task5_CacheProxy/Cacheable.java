@@ -10,6 +10,6 @@ import java.lang.annotation.Target;
 public @interface Cacheable {
     CacheType cacheType() default CacheType.RAM;
 
-    String pathToCache() default "";
+    String pathToCache() default "cache.dat";
 }
 
