@@ -1,4 +1,4 @@
-package theme5_reflectionProxyAnnotations;
+package theme5_reflectionProxyAnnotations.task5_CacheProxy;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,6 +9,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Cacheable {
     CacheType cacheType() default CacheType.RAM;
+
     String pathToCache() default "";
 }
 

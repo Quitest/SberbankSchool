@@ -13,7 +13,7 @@ public class Main {
         //FIXME не в полной мере соответствует заданию. Необходимо через конструктор работу выполнить.
         Calculator c = (Calculator) PerformanceProxy.newInstance(new CalculatorImpl());
         System.out.println("Calc без аннтации:");
-        System.out.println(c.calcWithoutAnnotation(NUMBER));
+        System.out.println(c.calcCacheable(NUMBER));
         System.out.println("Calc с анотацией:");
         System.out.println(c.calc(NUMBER));
 

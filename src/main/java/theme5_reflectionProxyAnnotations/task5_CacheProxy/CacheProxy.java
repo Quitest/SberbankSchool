@@ -1,4 +1,4 @@
-package theme5_reflectionProxyAnnotations;
+package theme5_reflectionProxyAnnotations.task5_CacheProxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
@@ -32,18 +32,11 @@ public class CacheProxy implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        Object result=null;
+        Object result = null;
         Cacheable cacheable = method.getAnnotation(Cacheable.class);
         if (cacheable == null) {
             return method.invoke(obj, args);
         }
-//        if ((result = memoryCache.get(obj)) != null) {
-//            return result;
-//        }
-//        if (cacheable.cacheType() == CacheType.RAM) {
-//            result = method.invoke(obj, args);
-//            memoryCache.put(obj, result);
-//        }
 
         //Сделано через switch, т.к. предполагается реализация третьего варианта кэша
         switch (cacheable.cacheType()) {
