@@ -1,11 +1,9 @@
 package theme5_reflectionProxyAnnotations.task1;
 
-import theme5_reflectionProxyAnnotations.task5_CacheProxy.Cacheable;
-
 import java.util.stream.IntStream;
 
 public class CalculatorImpl implements Calculator {
-    @Cacheable
+    //    @Cacheable
     @Override
     public int calc(int number) {
         return IntStream.rangeClosed(1, number)
