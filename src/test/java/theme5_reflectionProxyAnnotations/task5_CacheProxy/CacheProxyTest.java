@@ -1,5 +1,6 @@
 package theme5_reflectionProxyAnnotations.task5_CacheProxy;
 
+import org.junit.jupiter.api.Test;
 import theme5_reflectionProxyAnnotations.task1.Calculator;
 import theme5_reflectionProxyAnnotations.task1.CalculatorImpl;
 
@@ -7,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CacheProxyTest {
 
-    @org.junit.jupiter.api.Test
+    @Test
     void invoke() {
         Calculator calculator = (Calculator) CacheProxy.newInstance(new CalculatorImpl());
         int r;

@@ -16,6 +16,6 @@ public interface Calculator {
     @Metric
     int calc(int number);
 
-    @Cacheable/*(cacheType = CacheType.FILE)*/
+    @Cacheable
     int calcCacheable(int number);
 }
