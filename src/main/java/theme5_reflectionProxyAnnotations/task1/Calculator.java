@@ -1,6 +1,9 @@
 package theme5_reflectionProxyAnnotations.task1;
 
+import theme5_reflectionProxyAnnotations.task5_CacheProxy.CacheType;
+import theme5_reflectionProxyAnnotations.task5_CacheProxy.Cacheable;
 import theme5_reflectionProxyAnnotations.task6.Metric;
+
 
 public interface Calculator {
     /**
@@ -13,5 +16,6 @@ public interface Calculator {
     @Metric
     int calc(int number);
 
-    int calcWithoutAnnotation(int number);
+    @Cacheable
+    int calcCacheable(int number);
 }

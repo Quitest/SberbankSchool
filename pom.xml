@@ -15,6 +15,13 @@
         </dependency>
 
         <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>3.12.4</version>
@@ -27,6 +34,7 @@
             <version>5.8.0-RC1</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
