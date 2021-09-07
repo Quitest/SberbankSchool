@@ -9,8 +9,11 @@ public class Main {
         while (true) {
 //            loader = new PluginDynamicLoader(new String[]{"theme7_Classloaders/pluginRootDirectory/Plugin1"});
             loader = new PluginDynamicLoader(new String[]{"."});
-            Class<?> aClass = Class.forName("Plugin1", true, loader);
+//            Class<?> aClass = Class.forName("TestModule", true, loader);
+            Class<?> aClass = loader.loadClass("TestModule");
             Object o = aClass.getDeclaredConstructor().newInstance();
+//            Object o = aClass.newInstance();
+            TestModule tm = (TestModule)o;
             System.out.println(o);
             new BufferedReader(new InputStreamReader(System.in)).readLine();
         }
