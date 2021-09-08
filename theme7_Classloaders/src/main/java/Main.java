@@ -1,28 +1,26 @@
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
+import interfaces.Plugin;
+
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
-        PluginManager pluginManager = new PluginManager("D:\\JavaProjects\\SberbankSchool\\theme7_Classloaders\\pluginRootDirectory");
-//        System.out.println(
-//                pluginManager.load("n", "Plugin1.Plugin1"));
-        pluginManager.loadAllPlugins();
-
-
-        /*        ClassLoader loader;
-        while (true) {
-//            loader = new howto.PluginDynamicLoader(new String[]{"theme7_Classloaders/pluginRootDirectory/PluginsExamples.Plugin1.Plugin1"});
-//            loader = new PluginDynamicLoader(new String[]{"."});
-            loader = new PluginLoader(".");
-            Class<?> aClass = Class.forName("howto.TestModule", true, loader);
-//            Class<?> aClass = loader.loadClass("howto.TestModule");
-            Object o = aClass.getDeclaredConstructor().newInstance();
-//            Object o = aClass.newInstance();
-            TestModule tm = (TestModule)o;
-            System.out.println(o);
-            new BufferedReader(new InputStreamReader(System.in)).readLine();
-        }*/
+        PluginManager pluginManager = new PluginManager("theme7_Classloaders\\pluginRootDirectory");
+        Scanner scanner = new Scanner(System.in);
+        String s = "";
+        int counter = 1;
+        do {
+            System.out.println("Loop iteration: " + counter++);
+            if (s.equals("r")) {
+                pluginManager.reloadAllPlugins();
+            } else {
+                pluginManager.loadAllPlugins();
+            }
+            pluginManager.getPluginMap().values()
+                    .forEach(Plugin::doUsefull);
+            System.out.println("[r]eload plugins; [q]uit; Anything another - update list\nYour choice:");
+            s = scanner.nextLine();
+        } while (!"q".equalsIgnoreCase(s));
     }
 
 }
