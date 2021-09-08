@@ -1,4 +1,4 @@
-package PluginsExamples;
+package packagePlugin2;
 
 import interfaces.Plugin;
 

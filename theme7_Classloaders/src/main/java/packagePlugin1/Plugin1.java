@@ -1,3 +1,5 @@
+package packagePlugin1;
+
 import interfaces.Plugin;
 
 public class Plugin1 implements Plugin {

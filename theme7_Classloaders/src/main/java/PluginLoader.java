@@ -1,51 +1,50 @@
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PluginDynamicLoader extends ClassLoader {
-    private final String[] classPath;
-    private Map<String, Class<?>> classesHash = new HashMap<>();
+public class PluginLoader extends ClassLoader {
+    private final String pluginRootDirectory;
+    private final Map<String, Class<?>> classesCache = new HashMap<>();
 
-    public PluginDynamicLoader(String[] classPath) {
-        this.classPath = classPath;
+    public PluginLoader(String pluginRootDirectory) {
+        this.pluginRootDirectory = pluginRootDirectory;
     }
 
     public static byte[] loadFileAsBytes(File file) throws IOException {
-        byte[] result = new byte[(int) file.length()]; //WTF зачем при водим к (int)?
-        FileInputStream fis = new FileInputStream(file);
-        try {    //TODO переписать на try-with-resource
+        byte[] result = new byte[(int) file.length()]; //WTF получается, что максимальный размер файла для загрузки ограничен Integer.MAX_VALUE?
+        try (FileInputStream fis = new FileInputStream(file)) {
             fis.read(result, 0, result.length);
-        } finally {
-            try {
-                fis.close();
-            } catch (Exception e) {
-                // Игнорируем исключения, возникшие при
-                // вызове close. Они крайне маловероятны и не
-                // очень важны - файл уже прочитан. Но если
-                // они все же возникнут, то они не должны
-                // замаскировать действительно важные ошибки,
-                // возникшие при вызове read.
-            }
+        } catch (FileNotFoundException e) {
+            System.err.println(e.getMessage());
+            FileNotFoundException fnfe = new FileNotFoundException();
+            e.initCause(e);
+            throw fnfe;
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+            IOException ioe = new IOException();
+            e.initCause(e);
+            throw ioe;
         }
         return result;
     }
 
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {
-//        return super.findClass(name);
-        Class<?> result = classesHash.get(name);
+        Class<?> result = classesCache.get(name);
         if (result != null) {
             System.out.printf("[INFO]: Class %s found in cache.", name);
             return result;
         }
         File file = findFile(name.replace('.', '/'), ".class");
+//        File file = findFile(name.replace(File.separatorChar, '/'), "");
         // Класс mypackage.MyClass следует искать файле
         // mypackage/MyClass.class
-        System.out.printf("[INFO] Class %s %s %n", name, (file == null ? "" : " found in " + file));
+//        System.out.printf("[INFO] Class %s %s %n", name, (file == null ? "" : " found in " + file));
         if (file == null) {
             // Обращаемся к системному загрузчику в случае
             // неудачи. findSystemClass – это метод
@@ -72,7 +71,7 @@ public class PluginDynamicLoader extends ClassLoader {
         } catch (ClassFormatError e) {
             throw new ClassNotFoundException("Format of class file incorrect for class " + name + ": " + e);
         }
-        classesHash.put(name, result);
+        classesCache.put(name, result);
         return result;
     }
 
@@ -87,21 +86,18 @@ public class PluginDynamicLoader extends ClassLoader {
      */
     private File findFile(String name, String extension) {
         File file;
-        for (String s : classPath) {
-            file = new File((new File(s)).getPath()
-                    + File.separatorChar
-                    + name.replace('/', File.separatorChar)
-                    + extension);
-            if (file.exists()) {
-                return file;
-            }
+        file = new File((new File(pluginRootDirectory)).getPath()
+                + File.separatorChar
+                + name.replace('/', File.separatorChar)
+                + extension);
+        if (file.exists()) {
+            return file;
         }
         return null;
     }
 
     @Override
     protected URL findResource(String name) {
-//        return super.findResource(name);
         File file = findFile(name, "");
         if (file == null) {
             return null;
@@ -115,7 +111,6 @@ public class PluginDynamicLoader extends ClassLoader {
 
     @Override
     protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
-//        return super.loadClass(name, resolve);
         Class<?> result = findClass(name);
         if (resolve) {
             resolveClass(result);
