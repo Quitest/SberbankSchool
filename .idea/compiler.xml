@@ -7,9 +7,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="SberbankSchool" />
+        <module name="theme8_Serialization" />
         <module name="Sberbank School" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="theme7_Classloaders" target="14" />
+    </bytecodeTargetLevel>
   </component>
 </project>
