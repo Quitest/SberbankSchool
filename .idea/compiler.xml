@@ -11,5 +11,8 @@
         <module name="theme7_Classloaders" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="theme8_Serialization" target="14" />
+    </bytecodeTargetLevel>
   </component>
 </project>

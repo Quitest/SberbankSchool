@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +17,7 @@ public class PluginLoader extends ClassLoader {
     }
 
     public static byte[] loadFileAsBytes(File file) throws IOException {
-        byte[] result = new byte[(int) file.length()]; //WTF получается, что максимальный размер файла для загрузки ограничен Integer.MAX_VALUE?
+        byte[] result = new byte[(int) file.length()]; //WTF получается, что максимальный размер файла для загрузки ограничен Integer.MAX_VALUE? В таком случа необходимо читать файлы через буферизированный ридер в цикле?
         try (FileInputStream fis = new FileInputStream(file)) {
             fis.read(result, 0, result.length);
         } catch (FileNotFoundException e) {
@@ -41,26 +42,11 @@ public class PluginLoader extends ClassLoader {
             return result;
         }
         File file = findFile(name.replace('.', '/'), ".class");
-//        File file = findFile(name.replace(File.separatorChar, '/'), "");
         // Класс mypackage.MyClass следует искать файле
         // mypackage/MyClass.class
 //        System.out.printf("[INFO] Class %s %s %n", name, (file == null ? "" : " found in " + file));
         if (file == null) {
-            // Обращаемся к системному загрузчику в случае
-            // неудачи. findSystemClass – это метод
-            // абстрактного класса ClassLoader с объявлением
-            // protected Class findSystemClass(String name)
-            // (т.е. предназначенный для использования в
-            // наследниках и не подлежащий переопределению).
-            // Он выполняет поиск и загрузку класса по
-            // алгоритму системного загрузчика. Без вызова
-            // findSystemClass(name) нам пришлось бы
-            // самостоятельно позаботиться о загрузке всех
-            // стандартных библиотечных классов типа
-            // java.lang.String, что потребовало бы
-            // реализовать работу с JAR-архивами
-            // (стандартные библиотеки почти всегда
-            // упакованы в JAR)
+            // Обращаемся к системному загрузчику в случае неудачи.
             return findSystemClass(name);
         }
         try {
@@ -85,11 +71,11 @@ public class PluginLoader extends ClassLoader {
      * findResource.)
      */
     private File findFile(String name, String extension) {
-        File file;
-        file = new File((new File(pluginRootDirectory)).getPath()
-                + File.separatorChar
-                + name.replace('/', File.separatorChar)
-                + extension);
+        File file = Paths.get(
+                pluginRootDirectory,
+                File.separator,
+                name.replace('/',File.separatorChar),
+                extension).toFile();
         if (file.exists()) {
             return file;
         }
