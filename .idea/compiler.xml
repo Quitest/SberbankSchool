@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="theme8_Serialization" />
+        <module name="theme10_Multithreading_Part1" />
         <module name="Sberbank School" />
       </profile>
     </annotationProcessing>

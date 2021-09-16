@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>theme8_Serialization</module>
+        <module>theme10_Multithreading_Part1</module>
     </modules>
     <dependencies>
         <dependency>
