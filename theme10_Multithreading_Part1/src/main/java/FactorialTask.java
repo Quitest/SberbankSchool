@@ -1,3 +1,5 @@
+// This is a personal academic project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++, C#, and Java: http://www.viva64.com
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
@@ -7,10 +9,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FactorialTask implements Runnable {
-    private final String file;
+    private final Path path;
+
 
     public FactorialTask(String file) {
-        this.file = file;
+        this.path = Path.of(file);
     }
 
     @Override
@@ -34,9 +37,9 @@ public class FactorialTask implements Runnable {
     private int takeANumberFromFile() {
         int n = 0;
 
-        synchronized (file) {
+        synchronized (path) {
             try{
-                List<String> numbersList = Files.lines(Path.of(file))
+                List<String> numbersList = Files.lines(path)
                         .filter(str -> !str.isEmpty())
                         .collect(Collectors.toList());
                 //TODO переработать обработку исключительной ситуации, когда кончились числа в файле.
@@ -45,7 +48,7 @@ public class FactorialTask implements Runnable {
                     return -1;
                 }
                 n = Integer.parseInt(numbersList.get(numbersList.size() - 1));
-                PrintWriter writer = new PrintWriter(file);
+                PrintWriter writer = new PrintWriter(path.toFile());
                 for (int i = 0; i < numbersList.size() - 1; i++) {
                     writer.println(numbersList.get(i));
                 }
