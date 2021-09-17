@@ -16,6 +16,11 @@ public class FactorialTask implements Runnable {
     @Override
     public void run() {
         int number = takeANumberFromFile();
+        //Если нет чисел в файле, то просто прекращаем выполнение.
+        if (number==-1){
+            return;
+        }
+
         int multiplier = number;
         BigDecimal factorial = BigDecimal.ONE;
 
@@ -30,18 +35,19 @@ public class FactorialTask implements Runnable {
         int n = 0;
 
         synchronized (file) {
-            try {
+            try{
                 List<String> numbersList = Files.lines(Path.of(file))
                         .filter(str -> !str.isEmpty())
                         .collect(Collectors.toList());
-                if (numbersList.size()<=0){
-                    throw new IllegalArgumentException("Нет в файле нет чисел для вычисления факториала");
+                //TODO переработать обработку исключительной ситуации, когда кончились числа в файле.
+               //Если список пустой, то возвращаем -1, т.к. факториал отрицательного числа не считается, вроде бы.
+                if (numbersList.isEmpty()){
+                    return -1;
                 }
                 n = Integer.parseInt(numbersList.get(numbersList.size() - 1));
                 PrintWriter writer = new PrintWriter(file);
                 for (int i = 0; i < numbersList.size() - 1; i++) {
                     writer.println(numbersList.get(i));
-                    writer.flush();
                 }
                 writer.close();
             } catch (IOException e) {
