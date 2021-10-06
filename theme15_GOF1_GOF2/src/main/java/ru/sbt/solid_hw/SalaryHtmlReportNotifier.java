@@ -58,9 +58,7 @@ public class SalaryHtmlReportNotifier {
             helper.setSubject("Monthly department salary report");
             // send the message
             mailSender.send(message);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (MessagingException e) {
+        } catch (SQLException | MessagingException e) {
             e.printStackTrace();
         }
     }
