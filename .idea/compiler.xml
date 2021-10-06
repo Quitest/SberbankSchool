@@ -7,9 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="SberbankSchool" />
+        <module name="theme15_GOF1_GOF2" />
         <module name="Sberbank School" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="theme10_Multithreading_Part1" target="14" />
+      <module name="theme8_Serialization" target="14" />
+    </bytecodeTargetLevel>
   </component>
 </project>
