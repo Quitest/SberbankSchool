@@ -74,7 +74,9 @@ public class TestSalaryHtmlReportNotifier {
         when(mockMailSender.createMimeMessage()).thenReturn(mockMimeMessage);
         whenNew(JavaMailSenderImpl.class).withNoArguments().thenReturn(mockMailSender);
         MimeMessageHelper mockMimeMessageHelper = mock(MimeMessageHelper.class);
-        whenNew(MimeMessageHelper.class).withArguments(any(), any()).thenReturn(mockMimeMessageHelper);
+        whenNew(MimeMessageHelper.class)
+                .withArguments(any(), anyBoolean() /*any()*/)
+                .thenReturn(mockMimeMessageHelper);
         return mockMimeMessageHelper;
     }
 
