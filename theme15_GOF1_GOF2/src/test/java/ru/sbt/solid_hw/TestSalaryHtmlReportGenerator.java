@@ -12,6 +12,10 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import ru.sbt.solid_hw.reportGenerator.ReportGenerator;
+import ru.sbt.solid_hw.reportGenerator.SalaryHtmlReportGenerator;
+import ru.sbt.solid_hw.reportSender.EmailReportSender;
+import ru.sbt.solid_hw.reportSender.ReportSender;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -27,8 +31,8 @@ import java.time.LocalDate;
 import java.time.Month;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(SalaryHtmlReportNotifier.class)
-public class TestSalaryHtmlReportNotifier {
+@PrepareForTest(SalaryHtmlReportGenerator.class)
+public class TestSalaryHtmlReportGenerator {
 
     @Test
     public void test() throws Exception {
@@ -41,13 +45,14 @@ public class TestSalaryHtmlReportNotifier {
         MimeMessageHelper mockMimeMessageHelper = getMockedMimeMessageHelper();
 
         // set up parameters
-        SalaryHtmlReportNotifier notificator = new SalaryHtmlReportNotifier(someFakeConnection);
+        ReportGenerator reportGenerator = new SalaryHtmlReportGenerator(someFakeConnection);
         LocalDate dateFrom = LocalDate.of(2014, Month.JANUARY, 1);
         LocalDate dateTo = LocalDate.of(2014, Month.DECEMBER, 31);
-        // execute
-//        notificator.generateAndSendHtmlSalaryReport("10", dateFrom, dateTo, "somebody@gmail.com");
-        String htmlReport = notificator.generateHtmlSalaryReport("10", dateFrom, dateTo);
-        notificator.sendHtmlReport(htmlReport, "somebody@gmail.com");
+        String htmlReport = reportGenerator.generateReport("10", dateFrom, dateTo);
+        ReportSender sender = new EmailReportSender();
+        //execute
+        sender.sendReport(htmlReport, "somebody@gmail.com");
+
         // verify results
         String expectedReportPath = "src/test/resources/expectedReport.html";
         assertActualReportEqualsTo(mockMimeMessageHelper, expectedReportPath);

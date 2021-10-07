@@ -2,9 +2,6 @@ package ru.sbt.patterns_hw;
 
 //import ru.sbt.solid_hw.SalaryHtmlReportNotifier;
 
-import ru.sbt.solid_hw.SalaryHtmlReportNotifier;
-import sun.security.ec.point.Point;
-
 import java.util.Objects;
 
 public class Tractor {

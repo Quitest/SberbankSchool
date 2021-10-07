@@ -1,4 +1,4 @@
-package ru.sbt.solid_hw;
+package ru.sbt.solid_hw.reportGenerator;
 
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -11,15 +11,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-public class SalaryHtmlReportNotifier {
+public class SalaryHtmlReportGenerator implements ReportGenerator {
 
     private Connection connection;
 
-    public SalaryHtmlReportNotifier(Connection databaseConnection) {
+    public SalaryHtmlReportGenerator(Connection databaseConnection) {
         this.connection = databaseConnection;
     }
 
-    public String generateHtmlSalaryReport(String departmentId, LocalDate dateFrom, LocalDate dateTo/*, String recipients*/) {
+    public String generateReport(String departmentId, LocalDate dateFrom, LocalDate dateTo) {
         StringBuilder resultingHtml = new StringBuilder();
         try {
             // prepare statement with sql
@@ -33,7 +33,6 @@ public class SalaryHtmlReportNotifier {
             // execute query and get the results
             ResultSet results = ps.executeQuery();
             // create a StringBuilder holding a resulting html
-//            StringBuilder resultingHtml = new StringBuilder();
             resultingHtml.append("<html><body><table><tr><td>Employee</td><td>Salary</td></tr>");
             double totals = 0;
             while (results.next()) {
@@ -46,6 +45,14 @@ public class SalaryHtmlReportNotifier {
             }
             resultingHtml.append("<tr><td>Total</td><td>").append(totals).append("</td></tr>");
             resultingHtml.append("</table></body></html>");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultingHtml.toString();
+    }
+
+//    public void sendHtmlReport(String htmlReport, String recipients) {
+//        try {
 //            // now when the report is built we need to send it to the recipients list
 //            JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 //            // we're going to use google mail to send this message
@@ -55,34 +62,13 @@ public class SalaryHtmlReportNotifier {
 //            MimeMessageHelper helper = new MimeMessageHelper(message, true);
 //            helper.setTo(recipients);
 //            // setting message text, last parameter 'true' says that it is HTML format
-//            helper.setText(resultingHtml.toString(), true);
+//            helper.setText(htmlReport, true);
 //            helper.setSubject("Monthly department salary report");
 //            // send the message
 //            mailSender.send(message);
-        } catch (SQLException /*| MessagingException*/ e) {
-            e.printStackTrace();
-        }
-        return resultingHtml.toString();
-    }
-
-    public void sendHtmlReport(String htmlReport, String recipients) {
-        try {
-            // now when the report is built we need to send it to the recipients list
-            JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-            // we're going to use google mail to send this message
-            mailSender.setHost("mail.google.com");
-            // construct the message
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            helper.setTo(recipients);
-            // setting message text, last parameter 'true' says that it is HTML format
-            helper.setText(htmlReport, true);
-            helper.setSubject("Monthly department salary report");
-            // send the message
-            mailSender.send(message);
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-    }
+//        } catch (MessagingException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
 
