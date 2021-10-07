@@ -19,7 +19,8 @@ public class SalaryHtmlReportNotifier {
         this.connection = databaseConnection;
     }
 
-    public void generateAndSendHtmlSalaryReport(String departmentId, LocalDate dateFrom, LocalDate dateTo, String recipients) {
+    public String generateHtmlSalaryReport(String departmentId, LocalDate dateFrom, LocalDate dateTo/*, String recipients*/) {
+        StringBuilder resultingHtml = new StringBuilder();
         try {
             // prepare statement with sql
             PreparedStatement ps = connection.prepareStatement("select emp.id as emp_id, emp.name as amp_name, sum(salary) as salary from employee emp left join" +
@@ -32,7 +33,7 @@ public class SalaryHtmlReportNotifier {
             // execute query and get the results
             ResultSet results = ps.executeQuery();
             // create a StringBuilder holding a resulting html
-            StringBuilder resultingHtml = new StringBuilder();
+//            StringBuilder resultingHtml = new StringBuilder();
             resultingHtml.append("<html><body><table><tr><td>Employee</td><td>Salary</td></tr>");
             double totals = 0;
             while (results.next()) {
@@ -45,6 +46,27 @@ public class SalaryHtmlReportNotifier {
             }
             resultingHtml.append("<tr><td>Total</td><td>").append(totals).append("</td></tr>");
             resultingHtml.append("</table></body></html>");
+//            // now when the report is built we need to send it to the recipients list
+//            JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+//            // we're going to use google mail to send this message
+//            mailSender.setHost("mail.google.com");
+//            // construct the message
+//            MimeMessage message = mailSender.createMimeMessage();
+//            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+//            helper.setTo(recipients);
+//            // setting message text, last parameter 'true' says that it is HTML format
+//            helper.setText(resultingHtml.toString(), true);
+//            helper.setSubject("Monthly department salary report");
+//            // send the message
+//            mailSender.send(message);
+        } catch (SQLException /*| MessagingException*/ e) {
+            e.printStackTrace();
+        }
+        return resultingHtml.toString();
+    }
+
+    public void sendHtmlReport(String htmlReport, String recipients) {
+        try {
             // now when the report is built we need to send it to the recipients list
             JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
             // we're going to use google mail to send this message
@@ -54,11 +76,11 @@ public class SalaryHtmlReportNotifier {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setTo(recipients);
             // setting message text, last parameter 'true' says that it is HTML format
-            helper.setText(resultingHtml.toString(), true);
+            helper.setText(htmlReport, true);
             helper.setSubject("Monthly department salary report");
             // send the message
             mailSender.send(message);
-        } catch (SQLException | MessagingException e) {
+        } catch (MessagingException e) {
             e.printStackTrace();
         }
     }
