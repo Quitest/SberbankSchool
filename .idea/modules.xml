@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/theme10_Multithreading_Part1/theme10_Multithreading_Part1.iml" filepath="$PROJECT_DIR$/theme10_Multithreading_Part1/theme10_Multithreading_Part1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/theme11_MultiThreading_Part2/theme11_MultiThreading_Part2.iml" filepath="$PROJECT_DIR$/theme11_MultiThreading_Part2/theme11_MultiThreading_Part2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/theme6_Classloaders/theme6_Classloaders.iml" filepath="$PROJECT_DIR$/theme6_Classloaders/theme6_Classloaders.iml" />
+      <module fileurl="file://$PROJECT_DIR$/theme8_Serialization/theme8_Serialization.iml" filepath="$PROJECT_DIR$/theme8_Serialization/theme8_Serialization.iml" />
+    </modules>
+  </component>
+</project>
